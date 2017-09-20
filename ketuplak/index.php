@@ -38,10 +38,13 @@ require_once(__DIR__ . '/../config/includes/session.php');
                     <a href="index.php">Home</a>
                 </li>
                 <li>
+                    <a href="index.php?pages=kegiatan">Tambah Kegiatan</a>
+                </li>
+                <li>
                     <a href="index.php?pages=anggota">Data Keseluruhan Anggota</a>
                 </li>
                 <li>
-                    <a href="index.php?pages=kegiatan">Data Kepanitiaan</a>
+                    <a href="index.php?pages=panitia">Data Kepanitiaan</a>
                 </li>
                 <li>
                     <a href="index.php?pages=absen">Data Absen</a>

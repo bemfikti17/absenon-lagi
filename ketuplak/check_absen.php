@@ -5,7 +5,7 @@ $smd->bind_param("s",$_GET['lihat_id']);
 $smd->execute();
 $smd->bind_result($arg1);
 while ($smd->fetch()) {
-	$namakeg=$arg1;	
+	$namakeg = $arg1;	
 }
 ?>
 
@@ -35,7 +35,8 @@ while ($smd->fetch()) {
 //SELECT kepanitiaan.npm,kepanitiaan.id_kegiatan,jabatan_panitia,nama,kegiatan.nama_kegiatan,hadir,tdk_hadir,keterangan,jam_hadir,tgl_rapat FROM kepanitiaan INNER JOIN kegiatan on kepanitiaan.id_kegiatan = kegiatan.id_kegiatan INNER JOIN anggota on kepanitiaan.npm = anggota.npm INNER JOIN presensi on presensi.id_kepanitiaan = kepanitiaan.id_kepanitiaan WHERE kepanitiaan.id_kegiatan ='1' AND tgl_rapat='29-09-2017'
 //UPDET
 //SELECT kepanitiaan.npm,kepanitiaan.id_kegiatan,jabatan_panitia,nama,kegiatan.nama_kegiatan,hadir,tdk_hadir,keterangan,jam_hadir,tgl_rapat,presensi.id_rapat FROM kepanitiaan INNER JOIN kegiatan on kepanitiaan.id_kegiatan = kegiatan.id_kegiatan INNER JOIN anggota on kepanitiaan.npm = anggota.npm INNER JOIN presensi on presensi.id_kepanitiaan = kepanitiaan.id_kepanitiaan INNER JOIN rapat on presensi.id_rapat = rapat.id_rapat WHERE kepanitiaan.id_kegiatan ='1' AND presensi.id_rapat='1' 
-$sql = "SELECT kepanitiaan.npm,kepanitiaan.id_kegiatan,jabatan_panitia,nama,kegiatan.nama_kegiatan,hadir,tdk_hadir,keterangan,jam_hadir,tgl_rapat,presensi.id_rapat FROM kepanitiaan INNER JOIN kegiatan on kepanitiaan.id_kegiatan = kegiatan.id_kegiatan INNER JOIN anggota on kepanitiaan.npm = anggota.npm INNER JOIN presensi on presensi.id_kepanitiaan = kepanitiaan.id_kepanitiaan INNER JOIN rapat on presensi.id_rapat = rapat.id_rapat WHERE kepanitiaan.id_kegiatan =? AND presensi.id_rapat=?";
+//SELECT kepanitiaan.npm,kepanitiaan.id_kegiatan,jabatan_panitia,nama,kegiatan.nama_kegiatan,hadir,tdk_hadir,keterangan,jam_hadir,tgl_rapat,presensi.id_rapat FROM `kepanitiaan` LEFT JOIN `anggota` ON `kepanitiaan`.`npm` = `anggota`.`npm` LEFT JOIN `kegiatan` ON `kepanitiaan`.`id_kegiatan` = `kegiatan`.`id_kegiatan` LEFT JOIN `rapat` ON `rapat`.`id_kegiatan` = `kegiatan`.`id_kegiatan` LEFT JOIN `presensi` ON `presensi`.`id_rapat` = `rapat`.`id_rapat` WHERE kepanitiaan.id_kegiatan ='1' AND presensi.id_rapat='1'
+$sql = "SELECT kepanitiaan.npm,kepanitiaan.id_kegiatan,jabatan_panitia,nama,kegiatan.nama_kegiatan,hadir,tdk_hadir,keterangan,jam_hadir,presensi.tgl_rapat,presensi.id_rapat FROM `kepanitiaan` LEFT JOIN `anggota` ON `kepanitiaan`.`npm` = `anggota`.`npm` LEFT JOIN `kegiatan` ON `kepanitiaan`.`id_kegiatan` = `kegiatan`.`id_kegiatan` LEFT JOIN `rapat` ON `rapat`.`id_kegiatan` = `kegiatan`.`id_kegiatan` LEFT JOIN `presensi` ON `presensi`.`id_rapat` = `rapat`.`id_rapat` WHERE kepanitiaan.id_kegiatan =? AND presensi.id_rapat=?";
 $smd = $conn->prepare($sql);
 $smd->bind_param("ss",$_GET['lihat_id'],$_GET['id_rapat']);
 $smd->execute();
