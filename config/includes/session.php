@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set("Asia/Jakarta");
  if(session_id() == '') {
     session_start();
 }  //implementasi perintah PHP 5.3
@@ -6,6 +7,14 @@
 require_once(__DIR__ . '/../db/conn.php');
 
 if ($_SESSION):
+
+if ($_SESSION['otentikasi'] === false):
+//jika otentikasinya ada maka langsung lanjut main..
+//kalau nggak lempar ke login ..
+header("Location:" .$SERVER['DOCUMENT_ROOT']."/absenon/login.php");
+exit();
+endif;
+
 
 //mari kita bongkar data user itu apakah dia sebagai ketuplak, kabir,ka.. dll
 //SELECT * From koordinator INNER JOIN anggota on koordinator.npm = anggota.npm where koordinator.username = 'kips08' 

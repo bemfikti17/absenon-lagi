@@ -45,7 +45,7 @@ if (isset($_POST['submit'])) {
 						//mari kita cek di id_koornya ada nggak? kalau dia sebagai ketuplak level < 3 maka 
 						//ngecek dia masuk anggota mana aja.
 						//ambil datanya dari 
-						
+						$_SESSION['otentikasi'] = true;
 						$_SESSION['user'] = $usrname;
 						$_SESSION['level'] = $izin;
 						

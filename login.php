@@ -1,5 +1,6 @@
 <?php 
-session_start(); 
+
+require_once(__DIR__ . '/config/includes/session.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -107,7 +108,7 @@ session_start();
 		
 		<div class="col-lg-4"> </div>
 
-		<div class="col-lg-4 centred">
+			<div class="col-lg-4 centred">
 			
 			<div class="imgcontainer">
    			  <img src="resource/img/bemfikti.png" alt="Logo" class="logo_bem">

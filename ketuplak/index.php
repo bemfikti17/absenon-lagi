@@ -43,10 +43,10 @@ require_once(__DIR__ . '/../config/includes/session.php');
                     <a href="index.php?pages=kegiatan">Data Kegiatan</a>
                 </li>
                 <li>
-                    <a href="#">Data Absen</a>
+                    <a href="index.php?pages=absen">Data Absen</a>
                 </li>
                 <li>
-                    <a href="#">Laporan</a>
+                    <a href="index.php?pages=apaya">Laporan</a>
                 </li>
             </ul>
         </div>
