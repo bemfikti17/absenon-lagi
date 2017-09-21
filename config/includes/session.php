@@ -8,34 +8,63 @@ require_once(__DIR__ . '/../db/conn.php');
 if ($_SESSION):
 
 //mari kita bongkar data user itu apakah dia sebagai ketuplak, kabir,ka.. dll
-
-$sql = "SELECT id_koor,username,password,npm,izin,last_login FROM koordinator WHERE username =?";
-$smd->prepare($sql);
-$smd->bind_param("s",$username);
+//SELECT * From koordinator INNER JOIN anggota on koordinator.npm = anggota.npm where koordinator.username = 'kips08' 
+//SELECT id_koor,username,password,izin,last_login,nama,koordinator.npm FROM koordinator inner join anggota on  koordinator.npm =anggota.npm  WHERE koordinator.username ='jibrilhp'
+$sql = "SELECT id_koor,username,password,koordinator.npm,izin,last_login,nama FROM koordinator inner join anggota on  koordinator.npm =anggota.npm WHERE koordinator.username =?";
+$smd = $conn->prepare($sql);
+$smd->bind_param("s",$_SESSION['user'] );
 $smd->execute();
-$smd->bind_result($idkoor,$usrname,$pasw,$npm,$izin,$lastlogin);
-
-
-endif;
-
-
-if (isset($username)) {
-	$sql = "SELECT * FROM koordinator where username='$username'";
-	$result = mysqli_query($conn, $sql);
-	
-		if($row = mysqli_fetch_assoc($result)){	
-			$koor	 = $row['npm'];
-		}
-
-	$sql2 = "SELECT * FROM anggota where npm='$koor'";
-	$result2 = mysqli_query($conn, $sql2);
-	
-		if($row2 = mysqli_fetch_assoc($result2)){	
-			$nm_koor	 = $row2['nama'];
-		}
-}		
-else {
-	header('Location: ../login.php');
+$smd->bind_result($idkoor,$usrname,$pasw,$npm,$izin,$lastlogin,$nama);
+while ($smd->fetch()) {
+	$idkoor = $idkoor;
+	$usrname = $usrname;
+	$pasw = $pasw;
+	$npm = $npm;
+	$izin = $izin;
+	$lastlogin = $lastlogin;
+	$nama = $nama;
 }
 
+
+
+//mari kita cek di id_koornya ada nggak? kalau dia sebagai ketuplak level < 3 maka 
+						//ngecek dia masuk anggota mana aja.
+						//ambil datanya dari 
+						
+						
+						$_SESSION['level'] = $izin;
+						$_SESSION['npm'] = $npm;
+						$_SESSION['idkoor'] = $idkoor;
+						$_SESSION['nmkoor'] = $nama;
+						
+						if (!$pilihan === $izin) {
+						
+						switch ($izin) {
+							
+							case 0:
+							header("Location:" .$SERVER['DOCUMENT_ROOT']."/absenon/admin/index.php");
+							break;
+							
+							case 1:
+							header("Location:" .$SERVER['DOCUMENT_ROOT']."/absenon/bph/index.php");
+							break;
+							
+							case 2:
+							header("Location:" .$SERVER['DOCUMENT_ROOT']."/absenon/ketuplak/index.php");
+							break;
+							
+							case 3:
+							header("Location:" .$SERVER['DOCUMENT_ROOT']."/absenon/anggota/index.php");
+							break;
+							
+							default:
+							header("Location:" .$SERVER['DOCUMENT_ROOT']."/absenon/anggota/index.php");
+							break;
+							
+					
+						}
+					}
+						
+
+endif;						
 ?>
