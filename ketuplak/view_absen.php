@@ -68,17 +68,18 @@ else:
 //cek absen yang udah maupun yang sedang berjalan..
 foreach ($_SESSION['kegiatan_apa'] as $masing2) {
 	
-$sql = "SELECT rapat_ke,bahasan,tgl,timestamp_selesai,nama_kegiatan FROM rapat INNER JOIN kegiatan ON rapat.id_kegiatan = kegiatan.id_kegiatan WHERE rapat.id_kegiatan =?";
+$sql = "SELECT rapat_ke,bahasan,tgl,timestamp_selesai,nama_kegiatan,rapat.id_rapat FROM rapat INNER JOIN kegiatan ON rapat.id_kegiatan = kegiatan.id_kegiatan WHERE rapat.id_kegiatan =?";
 $smd = $conn->prepare($sql);
 $smd->bind_param("i",$masing2);
 $smd->execute();
-$smd->bind_result($arg,$arg2,$arg3,$arg4,$arg5);
+$smd->bind_result($arg,$arg2,$arg3,$arg4,$arg5,$arg6);
 while ($smd->fetch()) {
 	$kegiatan=$arg5;
 	$ket_kegiatan = $arg2;
 	$tgl_kegiatan = $arg3;
 	$batas = $arg4;
 	$rapatke = $arg;
+	$idrapat = $arg6;
 	
 	$var = $tgl_kegiatan ." " . $batas;
 	$amb = date("Y-m-d H:i:s", strtotime($var) );
@@ -97,7 +98,7 @@ while ($smd->fetch()) {
   <p>Tanggal Rapat : '.$tgl_kegiatan.'</p>
   <p>Peserta yang hadir : </p>
   <p class="lead">
-    <a class="btn btn-primary btn-lg" href="?pages=cek_absen&lihat_id='.$masing2.'&tanggal='.$tgl_kegiatan.'&rapat_ke='.$rapatke.'" role="button">Cek Kuy >></a>
+    <a class="btn btn-primary btn-lg" href="?pages=cek_absen&lihat_id='.$masing2.'&tanggal='.$tgl_kegiatan.'&rapat_ke='.$rapatke.'&id_rapat='.$idrapat.'" role="button">Cek Kuy >></a>
   </p>
 </div>';
 	} //jika masih berjalan..

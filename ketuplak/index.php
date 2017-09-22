@@ -15,6 +15,7 @@ require_once(__DIR__ . '/../config/includes/session.php');
 	<!-- CSS -->
 	<link rel="stylesheet" type="text/css" href="resource/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="resource/css/bootstrap.min.css">
+    <link rel="stylesheet" href="resource/css/font-awesome.min.css">
 
 	<!-- Custom styles for this template -->
 	<link href="resource/css/simple-sidebar.css" rel="stylesheet">
