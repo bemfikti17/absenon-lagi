@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 21 Sep 2017 pada 10.44
+-- Generation Time: 22 Sep 2017 pada 18.33
 -- Versi Server: 10.1.19-MariaDB
 -- PHP Version: 7.0.9
 
@@ -56,6 +56,7 @@ CREATE TABLE `anggota` (
 --
 
 INSERT INTO `anggota` (`npm`, `nama`, `kelas`, `jurusan`, `jenis_kelamin`, `ttl`, `domisili`, `kepengurusan`) VALUES
+('12345678', 'Puyeng', '5KA88', 'Sistem Informasi', 'L', '2017-09-07', 'Depok', 'Haha'),
 ('13115561', 'Jibril Hartri Putra', '3KA01', 'Sistem Informasi', 'L', '1997-01-21', 'Depok', 'Gabut'),
 ('14231645', 'Ryan Lewis', '1KA23', 'Sistem Informasi', 'Laki-Laki', '2017-09-05', 'Kalimalang', 'Staff Biro PTI'),
 ('16116611', 'Rizky Permana Putra', '1KA22', 'Sistem Informasi', 'Laki-Laki', '1998-09-01', 'Kalimalang', 'Staff Biro PTI');
@@ -68,15 +69,20 @@ INSERT INTO `anggota` (`npm`, `nama`, `kelas`, `jurusan`, `jenis_kelamin`, `ttl`
 
 CREATE TABLE `kegiatan` (
   `id_kegiatan` int(5) NOT NULL,
-  `nama_kegiatan` varchar(50) NOT NULL
+  `nama_kegiatan` varchar(50) NOT NULL,
+  `ket_kegiatan` varchar(1000) DEFAULT NULL,
+  `tgl_kegiatan` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `kegiatan`
 --
 
-INSERT INTO `kegiatan` (`id_kegiatan`, `nama_kegiatan`) VALUES
-(1, 'TECHNO FAIR');
+INSERT INTO `kegiatan` (`id_kegiatan`, `nama_kegiatan`, `ket_kegiatan`, `tgl_kegiatan`) VALUES
+(1, 'TECHNO FAIR', 'Hi', 'Duabelas'),
+(2, 'Meong', 'e', 'e'),
+(3, 'Meong', '2', 'q'),
+(4, 'Halo', 'Meong', 'Meong');
 
 -- --------------------------------------------------------
 
@@ -97,7 +103,11 @@ CREATE TABLE `kepanitiaan` (
 
 INSERT INTO `kepanitiaan` (`id_kepanitiaan`, `npm`, `id_kegiatan`, `jabatan_panitia`) VALUES
 (1, '16116611', 1, 'Ketua Pelaksana'),
-(2, '14231645', 1, 'Koor Keamanan');
+(2, '14231645', 1, 'Koor Keamanan'),
+(6, '12345678', 2, 'SIap'),
+(7, '16116611', 4, 'Ketua'),
+(8, '12345678', 4, 'Siip'),
+(9, '16116611', 4, 'd');
 
 -- --------------------------------------------------------
 
@@ -120,8 +130,9 @@ CREATE TABLE `koordinator` (
 --
 
 INSERT INTO `koordinator` (`id_koor`, `username`, `password`, `npm`, `izin`, `last_login`, `kegiatan`) VALUES
-(1, 'kips08', '$2y$10$4YP4PYv.p.CCnmytEcP.5eWRDaaFyXIl76YPMQLOaW2WMAelcedEC', '16116611', 0, NULL, '1:4:7'),
-(2, 'jibrilhp', '$2y$10$4YP4PYv.p.CCnmytEcP.5eWRDaaFyXIl76YPMQLOaW2WMAelcedEC', '13115561', 2, NULL, '1:2:3');
+(1, 'kips08', '$2y$10$4YP4PYv.p.CCnmytEcP.5eWRDaaFyXIl76YPMQLOaW2WMAelcedEC', '16116611', 2, NULL, '4'),
+(2, 'jibrilhp', '$2y$10$4YP4PYv.p.CCnmytEcP.5eWRDaaFyXIl76YPMQLOaW2WMAelcedEC', '13115561', 2, NULL, '1:2:3'),
+(3, 'jalur1', '$2y$10$4YP4PYv.p.CCnmytEcP.5eWRDaaFyXIl76YPMQLOaW2WMAelcedEC', '12345678', 3, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -136,16 +147,18 @@ CREATE TABLE `presensi` (
   `hadir` int(5) NOT NULL,
   `tdk_hadir` int(5) NOT NULL,
   `keterangan` varchar(250) NOT NULL,
-  `jam_hadir` varchar(10) NOT NULL
+  `jam_hadir` varchar(10) NOT NULL COMMENT '{JAM}:{MENIT}:{DETIK}',
+  `tgl_rapat` varchar(12) DEFAULT NULL COMMENT 'DD-MM-YYYY'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `presensi`
 --
 
-INSERT INTO `presensi` (`id_presensi`, `id_rapat`, `id_kepanitiaan`, `hadir`, `tdk_hadir`, `keterangan`, `jam_hadir`) VALUES
-(1, 1, 1, 1, 0, '-', '10:20'),
-(2, 1, 2, 0, 1, 'Sakit', '-');
+INSERT INTO `presensi` (`id_presensi`, `id_rapat`, `id_kepanitiaan`, `hadir`, `tdk_hadir`, `keterangan`, `jam_hadir`, `tgl_rapat`) VALUES
+(1, 3, 1, 1, 0, '-', '10:20', '29-09-2017'),
+(2, 3, 2, 0, 1, 'Sakit', '-', '29-09-2017'),
+(3, 1, 1, 1, 0, '', '22.22', '27-09-2017');
 
 -- --------------------------------------------------------
 
@@ -155,8 +168,10 @@ INSERT INTO `presensi` (`id_presensi`, `id_rapat`, `id_kepanitiaan`, `hadir`, `t
 
 CREATE TABLE `rapat` (
   `id_rapat` int(5) NOT NULL,
+  `rapat_ke` varchar(100) DEFAULT NULL,
   `bahasan` varchar(250) NOT NULL,
   `tgl` varchar(25) NOT NULL,
+  `timestamp_selesai` varchar(10) DEFAULT NULL COMMENT 'pukul berapa absen ini expired..?',
   `id_kegiatan` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -164,8 +179,11 @@ CREATE TABLE `rapat` (
 -- Dumping data untuk tabel `rapat`
 --
 
-INSERT INTO `rapat` (`id_rapat`, `bahasan`, `tgl`, `id_kegiatan`) VALUES
-(1, 'Keperluan Acara', '29 Sep 2017', 1);
+INSERT INTO `rapat` (`id_rapat`, `rapat_ke`, `bahasan`, `tgl`, `timestamp_selesai`, `id_kegiatan`) VALUES
+(1, '1', 'Keperluan Acara', '29-09-2017', '22:24:48', 1),
+(3, '2', 'Jibs', '27-09-2017', '22:24:49', 1),
+(4, '2', 'jewej', '21-09-2017', '22:39:08', 2),
+(5, '3', 'Meong', '22-09-2017', '14:08:50', 1);
 
 --
 -- Indexes for dumped tables
@@ -238,27 +256,27 @@ ALTER TABLE `absen`
 -- AUTO_INCREMENT for table `kegiatan`
 --
 ALTER TABLE `kegiatan`
-  MODIFY `id_kegiatan` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_kegiatan` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `kepanitiaan`
 --
 ALTER TABLE `kepanitiaan`
-  MODIFY `id_kepanitiaan` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_kepanitiaan` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `koordinator`
 --
 ALTER TABLE `koordinator`
-  MODIFY `id_koor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_koor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `presensi`
 --
 ALTER TABLE `presensi`
-  MODIFY `id_presensi` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_presensi` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `rapat`
 --
 ALTER TABLE `rapat`
-  MODIFY `id_rapat` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_rapat` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
