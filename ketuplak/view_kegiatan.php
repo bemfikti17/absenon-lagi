@@ -55,9 +55,10 @@
 
     <tbody>
         <?php 
+        if (!is_numeric($_GET['lihat_id'])) :  die("inputan yang aneh *_*"); endif;
             require_once '../config/db/conn.php';
             $sql_panitia="SELECT * FROM kepanitiaan inner join kegiatan on kepanitiaan.id_kegiatan = kegiatan.id_kegiatan 
-            inner join anggota on kepanitiaan.npm = anggota.npm";
+            inner join anggota on kepanitiaan.npm = anggota.npm WHERE kepanitiaan.id_kegiatan='".$_GET['lihat_id']."'";
              $result_panitia=mysqli_query($conn, $sql_panitia);
              if (mysqli_num_rows($result_panitia) > 0) {
         // output data of each row
