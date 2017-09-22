@@ -7,6 +7,10 @@ switch ($_GET['pages']) {
 	case 'anggota':
 		include 'view_anggota.php';
 		break;
+		
+	case 'tambah_panitia':
+		include   'set_panitia.php';
+		break;
 
 	case 'kegiatan':
 		include   'view_kegiatan.php';
