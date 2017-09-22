@@ -16,6 +16,7 @@ exit();
 endif;
 
 
+
 //mari kita bongkar data user itu apakah dia sebagai ketuplak, kabir,ka.. dll
 //SELECT * From koordinator INNER JOIN anggota on koordinator.npm = anggota.npm where koordinator.username = 'kips08' 
 //SELECT id_koor,username,password,izin,last_login,nama,koordinator.npm FROM koordinator inner join anggota on  koordinator.npm =anggota.npm  WHERE koordinator.username ='jibrilhp'
@@ -76,4 +77,15 @@ while ($smd->fetch()) {
 						
 
 endif;						
+
+
+function cek_pindah ($lihat_id_bener) {
+	
+
+if (in_array($lihat_id_bener,$_SESSION ['kegiatan_apa'])) {
+	return true;
+} else {
+	return false;
+}
+}
 ?>

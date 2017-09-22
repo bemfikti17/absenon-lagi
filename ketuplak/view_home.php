@@ -1,4 +1,7 @@
 <?php
+$_SESSION['kegiatan_apa'] = array(); //ini buat cek misal dia kegiatan 1,2,3 tapi kalau lihat_id iseng diganti jadi 4 maka nggak bisa hehe..,
+//variabel ini bersifat global
+
 $sql = "SELECT kegiatan FROM koordinator  WHERE username =?";
 $smd = $conn->prepare($sql);
 $smd->bind_param("s",$_SESSION['user'] );
@@ -13,6 +16,7 @@ while ($smd->fetch()) {
 $pisah = explode(":",$kegiatan);
 foreach ($pisah as $perkeg) {
 	tampil_proker($perkeg);
+	array_push($_SESSION['kegiatan_apa'],$perkeg);
 }
 
 
