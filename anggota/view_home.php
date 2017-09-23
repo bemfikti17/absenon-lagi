@@ -18,7 +18,7 @@ $jadikan = array("user"=>$username,"nama"=>$nama,"npm"=>$npm,"acak"=>$acaklah);
 $jadikan =json_encode($jadikan);
 
 
-$data = $jadikan;
+$data = base64_encode($jadikan);
 $size =  '300x300';
 $logo = 'resource/img/bemfikti.png';
 
