@@ -144,7 +144,7 @@ while ($smd->fetch()) {
   <p>Tanggal Pelaksanaan : '.$tgl_kegiatan.'</p>
   <p>Peserta yang hadir : </p>
   <p class="lead">
-    <a class="btn btn-primary btn-lg" href="?pages=atur_absen&lihat_id='.$masing2.'" role="button">Cek Kuy >></a>
+    <a class="btn btn-primary btn-lg" href="?pages=cek_absen&lihat_id='.$masing2.'&id_rapat='.$idrapat.'" role="button">Cek Kuy >></a>
   </p>
 </div>';
 	} //jika masih berjalan..

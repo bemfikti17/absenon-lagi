@@ -38,16 +38,19 @@ require_once(__DIR__ . '/../config/includes/session.php');
                     <a href="index.php">Home</a>
                 </li>
                 <li>
-                    <a href="index.php?pages=anggota">Data Keseluruhan Anggota</a>
+                    <a href="index.php?pages=kegiatan">Tambah Kegiatan</a>
                 </li>
                 <li>
-                    <a href="index.php?pages=kegiatan">Data Kepanitiaan</a>
+                    <a href="index.php?pages=anggota">Data Kslrhn aggta (gajadi)</a>
                 </li>
                 <li>
-                    <a href="index.php?pages=absen">Data Absen</a>
+                    <a href="index.php?pages=panitia">Data Kepanitiaan (belum work)</a>
                 </li>
                 <li>
-                    <a href="index.php?pages=apaya">Laporan</a>
+                    <a href="index.php?pages=absen">Data Presensi Absen</a>
+                </li>
+                <li>
+                    <a href="index.php?pages=apaya">Laporan(belum work)</a>
                 </li>
             </ul>
         </div>
@@ -64,7 +67,7 @@ require_once(__DIR__ . '/../config/includes/session.php');
 			</ul>
 
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="../config/includes/do_logout.php"><button >Logout</button></a></li>
+				<li><a href="../config/includes/do_logout.php"><button class="btn btn-primary">Logout</button></a></li>
 			</ul>
 			
 		</nav>

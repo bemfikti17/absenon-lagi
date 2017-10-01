@@ -13,9 +13,13 @@ switch ($_GET['pages']) {
 		break;
 
 	case 'kegiatan':
-		include   'view_kegiatan.php';
+		include   'set_kegiatan.php';
 		break;
 		
+	case 'panitia':
+		include   'view_panitia.php';
+		break;
+			
 	case 'atur_absen':
 		include   'set_absen.php';
 		break;
