@@ -1,5 +1,5 @@
 <?php 
-include 'session.php';
+//include 'session.php';
 
  ?>
 <!DOCTYPE html>
@@ -27,6 +27,7 @@ include 'session.php';
 				
             
         <!-- Sidebar -->
+
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
@@ -37,6 +38,10 @@ include 'session.php';
                 <li>
                     <a href="#">Home</a>
                 </li>
+				 <li>
+                    <a href="/aspirasi">Bantuan</a>
+                </li>
+				<!--
                 <li>
                     <a href="#">Data Anggota</a>
                 </li>
@@ -49,6 +54,7 @@ include 'session.php';
                 <li>
                     <a href="#">Laporan</a>
                 </li>
+				-->
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -60,11 +66,11 @@ include 'session.php';
 			  </a>
 
 			  <ul class="nav navbar-nav navbar-right">
-				<label style="color:#FFFFFF;">Selamat Datang, <?php echo $nm_koor ?> </label>
+				<label style="color:#FFFFFF;">Selamat Datang :)</label>
 			</ul>
 
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="logout.php"><button >Logout</button></a></li>
+				<!-- <li><a href="logout.php"><button >Logout</button></a></li> -->
 			</ul>
 			
 		</nav>

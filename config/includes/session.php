@@ -1,4 +1,6 @@
+
 <?php
+
 date_default_timezone_set("Asia/Jakarta");
  if(session_id() == '') {
     session_start();
@@ -8,15 +10,7 @@ require_once(__DIR__ . '/../db/conn.php');
 
 if ($_SESSION):
 
-if ($_SESSION['otentikasi'] === false):
-//jika otentikasinya ada maka langsung lanjut main..
-//kalau nggak lempar ke login ..
-header("Location:" .$SERVER['DOCUMENT_ROOT']."/absenon/login.php");
-exit();
-endif;
-
-
-
+if (isset($_SESSION['otentikasi']) && ($_SESSION['otentikasi'] === true )) {
 //mari kita bongkar data user itu apakah dia sebagai ketuplak, kabir,ka.. dll
 //SELECT * From koordinator INNER JOIN anggota on koordinator.npm = anggota.npm where koordinator.username = 'kips08' 
 //SELECT id_koor,username,password,izin,last_login,nama,koordinator.npm FROM koordinator inner join anggota on  koordinator.npm =anggota.npm  WHERE koordinator.username ='jibrilhp'
@@ -74,9 +68,24 @@ while ($smd->fetch()) {
 					
 						}
 					}
-						
+ }else {
+session_destroy(true);
+session_commit();
+//$_SESSION['user'] = "Pengguna";
+if ($_SERVER['REQUEST_URI'] === "/absenon/login.php") {
+} else {
+header("Location:" .$SERVER['DOCUMENT_ROOT']."/absenon/login.php");
+exit();				
 
-endif;						
+
+}					
+ }
+
+
+
+endif;
+
+
 
 
 function cek_pindah ($lihat_id_bener) {
