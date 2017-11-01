@@ -39,9 +39,18 @@ require_once(__DIR__ . '/../config/includes/session.php');
                 </li>
                 <li>
                     <a href="index.php?pages=kegiatan">Tambah Kegiatan</a>
+<<<<<<< HEAD
                 </li>
                 <li>
                     <a href="index.php?pages=anggota">Data Kslrhn aggta (gajadi)</a>
+=======
+                </li>
+                <li>
+                    <a href="index.php?pages=anggota">Data Keseluruhan Anggota</a>
+                </li>
+                <li>
+                    <a href="index.php?pages=panitia">Data Kepanitiaan</a>
+>>>>>>> d70b767c44947b8f80f5a89c52cb437f1fec3093
                 </li>
                 <li>
                     <a href="index.php?pages=panitia">Data Kepanitiaan (belum work)</a>
